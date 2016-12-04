@@ -31,8 +31,8 @@ Encoding = {
 
 class WhatCD {
 
-  constructor(username, password) {
-    this.domain = 'https://ssl.what.cd'
+  constructor(username, password, hostname) {
+    this.domain = hostname
     this.username = username
     this.password = password
     this.loggedIn = false
