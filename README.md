@@ -1,6 +1,7 @@
 # WhatCD API
 
 Javascript WhatCD API based on promises.
+Quick and dirty fork of [whatcd-api](https://github.com/Christilut/whatcd-api) by [Christilut](https://github.com/Christilut) to be used on other trackers. All credit goes to him/her for this awesome script.
 
 # Installation
 
