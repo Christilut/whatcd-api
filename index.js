@@ -29,10 +29,10 @@ Encoding = {
   V8: 'V8 (VBR)'
 }
 
-class WhatCD {
+class GazelleAPI {
 
-  constructor(username, password) {
-    this.domain = 'https://ssl.what.cd'
+  constructor(username, password, hostname) {
+    this.domain = hostname
     this.username = username
     this.password = password
     this.loggedIn = false
@@ -69,7 +69,7 @@ class WhatCD {
     if (!domain) throw new Error('domain parameter missing')
     if (params && typeof params !== 'object') throw new Error('invalid params parameter')
 
-    let uri = `${domain}/${endpoint}.php?action=${action}`
+    let uri = `${domain}${endpoint}.php?action=${action}`
 
     if (params) {
       for (let key of Object.keys(params)) {
@@ -144,7 +144,7 @@ class WhatCD {
 
         loginPromise.then(() => {
           const actionPromise = rp({
-              uri: WhatCD._buildUri(this.domain, endpoint, action, params),
+              uri: GazelleAPI._buildUri(this.domain, endpoint, action, params),
               method: 'GET',
               json: true,
               resolveWithFullResponse: true,
@@ -232,7 +232,7 @@ class WhatCD {
       'torrents',
       true
     ).then(response => {
-      const filename = WhatCD._extractFilename(response.headers)
+      const filename = GazelleAPI._extractFilename(response.headers)
 
       return fsp.writeFile(path.join(targetpath, filename), response.body, 'binary')
     })
@@ -240,4 +240,4 @@ class WhatCD {
   }
 }
 
-module.exports = WhatCD
+module.exports = GazelleAPI

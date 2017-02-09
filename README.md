@@ -1,24 +1,24 @@
-# WhatCD API
+# Gazelle API
 
-Javascript WhatCD API based on promises.
+Javascript Gazelle API based on promises.
 
 # Installation
 
 Requires Node >= 6.0
 
-`npm install whatcd-api`
+`npm install gazelle-api`
 
 
 # Usage
 
-Check [WhatCD API](https://github.com/WhatCD/Gazelle/wiki/JSON-API-Documentation) for all available endpoints. For example, the browse action (which searches WhatCD) requires a `searchstr` parameter so you must add that in the object passed to `what.action()`.
+Check [WhatCD API](https://github.com/WhatCD/Gazelle/wiki/JSON-API-Documentation) for all available endpoints. For example, the browse action (which searches the tracker) requires a `searchstr` parameter so you must add that in the object passed to `gazelle.action()`.
 
 ```js
-const WhatCD = require('whatcd-api')
+const GazelleAPI = require('gazelle-api')
 
-const what = new WhatCD('whatcd_username', 'whatcd_password')
+const gazelle = new GazelleAPI('username', 'password', 'hostname')
 
-what.action('browse', {
+gazelle.action('browse', {
   searchstr: 'my favourite band'
 }).then(response => {
   console.log(response)
@@ -31,23 +31,23 @@ This library is rate limited to 5 requests per 10 seconds as specified by the Wh
 
 # API
 
-`what.action(action=string, parameters=object)`: Low level method to perform any action as described in the WhatCD API documentation.
+`gazelle.action(action=string, parameters=object)`: Low level method to perform any action as described in the WhatCD API documentation.
 
-`what.search(artist=string, album=string)`: Helper method that searches for an artist/album. It will start at 320kbps and search for a V0 release if nothing was found.
+`gazelle.search(artist=string, album=string)`: Helper method that searches for an artist/album. It will start at 320kbps and search for a V0 release if nothing was found.
 
-`what.download(id=integer, path=string)`: Helper method to download a .torrent file from the torrent ID that was supplied. Will save to specified path. Path must not include a filename.
+`gazelle.download(id=integer, path=string)`: Helper method to download a .torrent file from the torrent ID that was supplied. Will save to specified path. Path must not include a filename.
 
 # Testing
 
 `npm test` (will use fixtures)
 
 Some tests require a username and password:  
-`env WHATCD_USERNAME='' WHATCD_PASSWORD='' npm test -- -g 'login'`
+`env GAZELLE_USERNAME='' GAZELLE_PASSWORD='' npm run test`
 
-For a live test (caution):  
-`env WHATCD_USERNAME='' WHATCD_PASSWORD='' LIVE=true npm test -- -g 'search'`
+For a live test (not currently working):  
+`env GAZELLE_USERNAME='' GAZELLE_PASSWORD='' LIVE=true npm test -- -g 'search'`
 
-Careful not to get banned for multiple false login attempts.
+Careful not to get banned for multiple false login attempts. Some tests currently only work with PTH.
 
 # Contribute
 
